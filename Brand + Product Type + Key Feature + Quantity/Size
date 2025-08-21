@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pravin Biryani Centre</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff9f1c, #ff4040);
+      color: white;
+      text-align: center;
+    }
+    header {
+      padding: 40px 20px;
+      background: rgba(0,0,0,0.5);
+    }
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+    header img {
+      width: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 4px solid white;
+    }
+    main {
+      padding: 20px;
+    }
+    .order-box {
+      background: white;
+      color: black;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: auto;
+    }
+    .order-box h2 {
+      margin-bottom: 15px;
+    }
+    .order-box input, .order-box select, .order-box textarea, .order-box button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      font-size: 1em;
+    }
+    .order-box button {
+      background: #ff4040;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .order-box button:hover {
+      background: #e52d2d;
+    }
+    .price {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    function updatePrice() {
+      let qty = document.getElementById("quantity").value;
+      let price = qty * 80;
+      document.getElementById("price").innerText = "Total: ₹" + price;
+    }
+
+    function sendOrder() {
+      let name = document.getElementById("name").value;
+      let phone = document.getElementById("phone").value;
+      let address = document.getElementById("address").value;
+      let qty = document.getElementById("quantity").value;
+      let total = qty * 80;
+
+      if(!name || !phone || !address) {
+        alert("Please fill all details!");
+        return;
+      }
+
+      let message = `🍽 Pravin Biryani Order 🍽\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n🏠 Address: ${address}\n🍛 Quantity: ${qty} Pockets\n💰 Total: ₹${total}`;
+      
+      let url = "https://wa.me/916371764660?text=" + encodeURIComponent(message);
+      window.open(url, "_blank");
+
+      // Redirect to thank you page after 2 seconds
+      setTimeout(() => {
+        window.location.href = "thankyou.html";
+      }, 2000);
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Biryani Logo">
+    <h1>Pravin Biryani Centre</h1>
+    <p>🔥 Order before it’s gone! Limited pockets available daily 🔥</p>
+  </header>
+  <main>
+    <div class="order-box">
+      <h2>Order Your Biryani</h2>
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="text" id="phone" placeholder="Phone Number" required>
+      <textarea id="address" placeholder="Delivery Address" required></textarea>
+      <label for="quantity">Choose Pockets (max 10):</label>
+      <select id="quantity" onchange="updatePrice()">
+        <option value="1">1 Pocket</option>
+        <option value="2">2 Pockets</option>
+        <option value="3">3 Pockets</option>
+        <option value="4">4 Pockets</option>
+        <option value="5">5 Pockets</optio
